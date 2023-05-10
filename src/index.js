@@ -59,19 +59,40 @@ function CustomMetaPanel() {
   //     setMeta({ ...meta, typp_name: newLabel });
   //   };
   const playerID = meta.typp_id;
-  const updatePlayer = (newValue) => {
-    setMeta({
-      ...meta,
-      typp_id: newValue,
-      typp_name: playersOptions.filter((player) => player.value == newValue)[0]
-        .label,
-      typp_type: playersOptions.filter((player) => player.value == newValue)[0]
-        .type,
-    });
-  };
+  function updatePlayer(newValue) {
+    if (
+      playersOptions.filter((player) => player.value == newValue)[0].type ===
+      "dynamic"
+    ) {
+      setMeta({
+        ...meta,
+        typp_id: newValue,
+        typp_name: playersOptions.filter(
+          (player) => player.value == newValue
+        )[0].label,
+        typp_type: playersOptions.filter(
+          (player) => player.value == newValue
+        )[0].type,
+        typp_position: "",
+      });
+    } else {
+      setMeta({
+        ...meta,
+        typp_id: newValue,
+        typp_name: playersOptions.filter(
+          (player) => player.value == newValue
+        )[0].label,
+        typp_type: playersOptions.filter(
+          (player) => player.value == newValue
+        )[0].type,
+        typp_position: "Before Content",
+      });
+    }
+  }
+  const playerType = meta.typp_type;
   const playerPosition = meta.typp_position;
   const updatePlayerPosition = (newValue) => {
-    setMeta({ ...meta, typp_position: newValue });
+    setMeta({ ...meta, typp_position: newValue || "" });
   };
   return (
     <PluginDocumentSettingPanel
@@ -91,16 +112,6 @@ function CustomMetaPanel() {
       /> */}
       <SelectControl
         onClick={getPlayers}
-        label="Select a Static Player"
-        value={playerID}
-        options={titleOption.concat(
-          playersOptions.filter((player) => player.type == "static")
-        )}
-        onChange={updatePlayer}
-      />
-      <br />
-      <SelectControl
-        onClick={getPlayers}
         label="Select a Dynamic Player"
         value={playerID}
         options={titleOption.concat(
@@ -110,15 +121,27 @@ function CustomMetaPanel() {
       />
       <br />
       <SelectControl
-        label="Select a Player Position"
-        value={playerPosition}
-        options={[
-          { label: "Before Content", value: "Before Content" },
-          // { label: "After 1st Paragraph", value: "After 1st Paragraph" },
-          { label: "After Content", value: "After Content" },
-        ]}
-        onChange={updatePlayerPosition}
+        onClick={getPlayers}
+        label="Select a Static Player"
+        value={playerID}
+        options={titleOption.concat(
+          playersOptions.filter((player) => player.type == "static")
+        )}
+        onChange={updatePlayer}
       />
+      <br />
+      {playerType === "static" ? (
+        <SelectControl
+          label="Select a Player Position"
+          value={playerPosition}
+          options={[
+            { label: "Before Content", value: "Before Content" },
+            // { label: "After 1st Paragraph", value: "After 1st Paragraph" },
+            { label: "After Content", value: "After Content" },
+          ]}
+          onChange={updatePlayerPosition}
+        />
+      ) : null}
     </PluginDocumentSettingPanel>
   );
 }
