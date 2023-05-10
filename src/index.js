@@ -65,6 +65,8 @@ function CustomMetaPanel() {
       typp_id: newValue,
       typp_name: playersOptions.filter((player) => player.value == newValue)[0]
         .label,
+      typp_type: playersOptions.filter((player) => player.value == newValue)[0]
+        .type,
     });
   };
   const playerPosition = meta.typp_position;

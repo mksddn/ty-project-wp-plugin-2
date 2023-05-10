@@ -5,6 +5,7 @@ function typp_admin_columns($column_array)
 {
   $column_array['typp_name'] = 'TY Project Player';
   $column_array['typp_id'] = 'TY Project Player ID';
+  $column_array['typp_type'] = 'Player Type';
   $column_array['typp_position'] = 'Player Position';
   return $column_array;
 }
@@ -19,6 +20,10 @@ function typp_populate_admin_columns($column_name, $post_id)
       }
       case 'typp_id': {
         echo get_post_meta($post_id, 'typp_id', true);
+        break;
+      }
+      case 'typp_type': {
+        echo get_post_meta($post_id, 'typp_type', true);
         break;
       }
     case 'typp_position': {
