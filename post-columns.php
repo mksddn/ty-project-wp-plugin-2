@@ -11,6 +11,7 @@ function typp_admin_columns($column_array)
 }
 
 add_action('manage_posts_custom_column', 'typp_populate_admin_columns', 10, 2);
+add_action('manage_pages_custom_column', 'typp_populate_admin_columns', 10, 2);
 function typp_populate_admin_columns($column_name, $post_id)
 {
   switch ($column_name) {

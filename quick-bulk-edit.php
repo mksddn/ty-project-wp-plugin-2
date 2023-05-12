@@ -45,6 +45,7 @@ function typp_quick_edit_fields($column_name, $post_type)
                       opt.value = option.value;
                       // opt.option = option.label;
                       opt.text = option.label;
+                      opt.setAttribute('data-type', option.type);
                       selector.add(opt);
                     });
                   }
@@ -58,6 +59,9 @@ function typp_quick_edit_fields($column_name, $post_type)
             const newPlayerName = select.options[select.selectedIndex].text;
             const typpNameInput = select.parentNode.querySelector('.typp_name_selector');
             typpNameInput.value = newPlayerName;
+            const newPlayerType = select.options[select.selectedIndex].getAttribute('data-type');
+            const typpTypeInput = select.parentNode.querySelector('.typp_type_selector');
+            typpTypeInput.value = newPlayerType;
           }
         </script>
         <fieldset class="inline-edit-col-left" style="width:auto;">
@@ -66,6 +70,7 @@ function typp_quick_edit_fields($column_name, $post_type)
             <select name="typp_id" class="typp_id_selector" onchange="setNewPlayer();">
             </select>
             <input type="hidden" name="typp_name" class="typp_name_selector">
+            <input type="hidden" name="typp_type" class="typp_type_selector">
           </div>
         <?php
         break;
@@ -99,6 +104,8 @@ function typp_quick_edit_save($post_id)
   update_post_meta($post_id, 'typp_id', $typp_id);
   $typp_position = $_REQUEST['typp_position'] ?? get_post_meta($post_id, 'typp_position', true);
   update_post_meta($post_id, 'typp_position', $typp_position);
+  $typp_type = $_REQUEST['typp_type'] ?? get_post_meta($post_id, 'typp_type', true);
+  update_post_meta($post_id, 'typp_type', $typp_type);
 }
 
 add_action('admin_footer', 'typp_admin_footer_action');
