@@ -54,6 +54,28 @@ function typp_quick_edit_fields($column_name, $post_type)
           };
           getPlayers();
 
+          function checkPositionFields() {
+            document.querySelectorAll('.row-actions button.button-link.editinline').forEach(element => {
+              element.addEventListener('click', function(e) {
+                setTimeout(() => {
+                  const row = e.target.closest('tr.iedit')
+                  const playerType = row.querySelector('td.typp_type.column-typp_type').textContent;
+                  const playerID = row.querySelector('td.typp_id.column-typp_id').textContent;
+                  const positionField = document.querySelector(`option[value="${playerID}"]`).closest('fieldset').querySelector('div:has(label[for="typp_position"])');
+                  console.log(playerType);
+                  // console.log(playerID);
+                  console.log(positionField);
+                  if (playerType === 'dynamic') {
+                    positionField.style.display = 'none';
+                  } else {
+                    positionField.style.display = 'block';
+                  }
+                }, 500);
+              })
+            });
+          }
+          checkPositionFields();
+
           function setNewPlayer() {
             const select = event.target;
             const newPlayerName = select.options[select.selectedIndex].text;
@@ -62,6 +84,12 @@ function typp_quick_edit_fields($column_name, $post_type)
             const newPlayerType = select.options[select.selectedIndex].getAttribute('data-type');
             const typpTypeInput = select.parentNode.querySelector('.typp_type_selector');
             typpTypeInput.value = newPlayerType;
+            const positionField = select.parentNode.parentNode.querySelector('div:has(label[for="typp_position"])');
+            if (newPlayerType === 'dynamic') {
+              positionField.style.display = 'none';
+            } else {
+              positionField.style.display = 'block';
+            }
           }
         </script>
         <fieldset class="inline-edit-col-left" style="width:auto;">
@@ -125,9 +153,11 @@ function typp_admin_footer_action($data)
           const typp_name = $('.column-typp_name', post_row).text();
           const typp_id = $('.column-typp_id', post_row).text();
           const typp_position = $('.column-typp_position', post_row).text();
+          const typp_type = $('.column-typp_type', post_row).text();
           $(':input[name="typp_id"]', edit_row).val(typp_id);
           $(':input[name="typp_name"]', edit_row).val(typp_name);
           $(':input[name="typp_position"]', edit_row).val(typp_position);
+          $(':input[name="typp_type"]', edit_row).val(typp_type);
         }
       }
     });
@@ -149,4 +179,6 @@ function typp_bulk_edit_save($post_id)
   update_post_meta($post_id, 'typp_id', $typp_id);
   $typp_position = !empty($_REQUEST['typp_position']) ? $_REQUEST['typp_position'] : get_post_meta($post_id, 'typp_position', true);
   update_post_meta($post_id, 'typp_position', $typp_position);
+  $typp_type = $_REQUEST['typp_type'] ?? get_post_meta($post_id, 'typp_type', true);
+  update_post_meta($post_id, 'typp_type', $typp_type);
 }
