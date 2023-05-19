@@ -30,18 +30,6 @@ function add_settings()
   register_setting('typp_settings', $typp_user_password);
   register_setting('typp_settings', 'typp_token', array('show_in_rest' => true));
   register_setting('typp_settings', 'typp_refresh_token');
-  // register_setting('typp_settings', 'typp_players', array(
-  //   'type' => 'array',
-  //   'show_in_rest' => array(
-  //     'schema' => array(
-  //       'items' => array(
-  //         // 'type' => 'object',
-  //         'value'    => 'string',
-  //         'label' => 'string',
-  //       ),
-  //     ),
-  //   ),
-  // ));
 
   add_settings_section('typp_settings_section', 'Use your credentials to log in to the TY Project', '', 'typp');
 
@@ -95,14 +83,6 @@ function add_password_field($args)
 function show_settings_form()
 {
 
-  // echo get_option('typp_token');
-  // echo '<br>';
-  // echo get_option('typp_refresh_token');
-  // echo '<br>';
-  // echo '<pre>';
-  // print_r(get_option('typp_players'));
-  // echo '</pre>';
-
   if (get_option('typp_user_email') && get_option('typp_user_password')) {
     typp_auth(get_option('typp_user_email'), get_option('typp_user_password'));
   }
@@ -138,24 +118,4 @@ function typp_auth($email, $password)
     echo '<div class="notice notice-error is-dismissible"><p>' . $responceData['message'] . '</p>
     <p>You can change your password on <a href="https://ty.mailstone.net/" target="_blank">TY Project Page</a></p></div>';
   }
-
-  // echo '<br><b>wp_remote_retrieve_body: </b><br><pre>';
-  // print_r(json_decode(wp_remote_retrieve_body($response)));
-  // echo '</pre>';
-  // $bodyVars = get_object_vars(json_decode(wp_remote_retrieve_body($response)));
-  // echo 'USER ID : ' . $bodyVars['id'] . '<br>';
-
-  // echo '<br><b>wp_remote_retrieve_headers: </b><br><pre>';
-  // print_r(wp_remote_retrieve_headers($response));
-  // echo wp_remote_retrieve_headers($response)['access-token'];
-  // echo '<br>';
-  // echo wp_remote_retrieve_headers($response)['refresh-token'];
-  // echo '</pre>';
-
-  // echo '<br><b>wp_remote_retrieve_response_code: </b>';
-  // print_r(json_decode(wp_remote_retrieve_response_code($response)));
-
-  // echo '<br><b>wp_remote_retrieve_response_message: </b>';
-  // print_r(wp_remote_retrieve_response_message($response));
-
 }

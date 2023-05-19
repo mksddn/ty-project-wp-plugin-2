@@ -49,28 +49,6 @@ function typp_show_player()
 }
 
 
-// $paragraphAfter[1] = '<div>AFTER FIRST</div>'; //display after the first paragraph
-// $paragraphAfter[3] = '<div>AFTER THIRD</div>'; //display after the third paragraph
-// $paragraphAfter[5] = '<div>AFTER FIFtH</div>'; //display after the fifth paragraph
-
-// $content = apply_filters('the_content', get_the_content());
-// $content = explode("</p>", $content);
-// $count = count($content);
-// for ($i = 0; $i < $count; $i++) {
-//   if (array_key_exists($i, $paragraphAfter)) {
-//     echo $paragraphAfter[$i];
-//   }
-//   echo $content[$i] . "</p>";
-// }
-
-
-// function add_main_typp_script()
-// {
-//   wp_enqueue_script('main_typp_script', 'https://ty.mailstone.net/widget/player.js');
-// }
-// add_action('wp_enqueue_scripts', 'add_main_typp_script');
-
-
 function add_main_typp_script()
 {
   wp_enqueue_script('script-name', 'https://ty.mailstone.net/widget/player.js');

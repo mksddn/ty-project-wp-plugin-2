@@ -2,7 +2,6 @@
 
 /**
  * Plugin Name:       TY Project Player
- * Plugin URI:        https://plugin-url.net
  * Description:       Gutenberg Sidebar for TY Project
  * Requires at least: 5.3
  * Requires PHP:      7.0

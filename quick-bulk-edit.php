@@ -18,7 +18,6 @@ function typp_quick_edit_fields($column_name, $post_type)
                 },
               })
               .then((response) => {
-                // console.log(response.ok);
                 return response.json();
               })
               .then((data) => {
@@ -29,7 +28,6 @@ function typp_quick_edit_fields($column_name, $post_type)
                     value: player.id,
                     type: player.type,
                   }));
-                // console.log(playerOptions);
               })
               .catch((err) => {
                 // renderErrorMessage(err);
@@ -109,7 +107,6 @@ function typp_quick_edit_fields($column_name, $post_type)
             <label for="typp_position">Player Position</label>
             <select name="typp_position" class="typp_position_selector">
               <option value="Before Content">Before Content</option>
-              <!-- <option value="After 1st Paragraph">After 1st Paragraph</option> -->
               <option value="After Content">After Content</option>
             </select>
           </div>

@@ -1,4 +1,4 @@
-import { PanelRow, TextControl, SelectControl } from "@wordpress/components";
+import { SelectControl } from "@wordpress/components";
 import { useSelect } from "@wordpress/data";
 import { useEntityProp } from "@wordpress/core-data";
 import { PluginDocumentSettingPanel } from "@wordpress/edit-post";
@@ -36,12 +36,6 @@ function CustomMetaPanel() {
       })
       .finally((data) => {
         // console.log("fetch finished");
-        // setPlayersOptions(
-        //   data.map((player) => ({
-        //     label: player.name,
-        //     value: player.id,
-        //   }))
-        // );
       });
   };
   useEffect(() => {
@@ -55,9 +49,6 @@ function CustomMetaPanel() {
   );
   const [meta, setMeta] = useEntityProp("postType", postType, "meta");
   const playerName = meta.typp_name;
-  //   const updatePlayerName = (newLabel) => {
-  //     setMeta({ ...meta, typp_name: newLabel });
-  //   };
   const playerID = meta.typp_id;
   function updatePlayer(newValue) {
     if (
@@ -105,11 +96,6 @@ function CustomMetaPanel() {
         </b>
       </p>
       <br />
-      {/* <TextControl
-        label="Selected Player"
-        value={playerName}
-        //   onChange={updatePlayerID}
-      /> */}
       <SelectControl
         onClick={getPlayers}
         label="Select a Dynamic Player"
@@ -136,7 +122,6 @@ function CustomMetaPanel() {
           value={playerPosition}
           options={[
             { label: "Before Content", value: "Before Content" },
-            // { label: "After 1st Paragraph", value: "After 1st Paragraph" },
             { label: "After Content", value: "After Content" },
           ]}
           onChange={updatePlayerPosition}
