@@ -106,8 +106,11 @@ function typp_quick_edit_fields($column_name, $post_type)
           <div class="inline-edit-col">
             <label for="typp_position">Player Position</label>
             <select name="typp_position" class="typp_position_selector">
+              <option value="After Title">After Title</option>
               <option value="Before Content">Before Content</option>
               <option value="After Content">After Content</option>
+              <option value="After 1st Paragraph">After 1st Paragraph</option>
+              <option value="After 2nd Paragraph">After 2nd Paragraph</option>
             </select>
           </div>
         </fieldset>

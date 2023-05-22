@@ -47,6 +47,7 @@ function CustomMetaPanel() {
     (select) => select("core/editor").getCurrentPostType(),
     []
   );
+  console.log(postType);
   const [meta, setMeta] = useEntityProp("postType", postType, "meta");
   const playerName = meta.typp_name;
   const playerID = meta.typp_id;
@@ -121,8 +122,11 @@ function CustomMetaPanel() {
           label="Select a Player Position"
           value={playerPosition}
           options={[
+            { label: "After Title", value: "After Title" },
             { label: "Before Content", value: "Before Content" },
             { label: "After Content", value: "After Content" },
+            { label: "After 1st Paragraph", value: "After 1st Paragraph" },
+            { label: "After 2nd Paragraph", value: "After 2nd Paragraph" },
           ]}
           onChange={updatePlayerPosition}
         />

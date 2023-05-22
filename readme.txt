@@ -32,3 +32,6 @@ Gutenberg Sidebar for TY Project
 - Updating the player type using bulk edit
 - Hide the position field if new player type is dynamic (for quick/bulk edit)
 - Hide the position field if old player type is dynamic (for quick edit)
+
+= 0.2.6 (2023-05-22): =
+- Added new player positions (after 1-2 paragraph, after title)
