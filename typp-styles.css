@@ -2,3 +2,18 @@ th.column-typp_id,
 td.column-typp_id {
   display: none;
 }
+.typp-btn {
+  margin-bottom: 1rem;
+}
+.typp-slct-hide {
+  height: 0;
+  opacity: 0;
+}
+.components-base-control__field:has(>.typp-slct-hide) {
+  margin: 0;
+}
+.typp-slct-show {
+  margin-bottom: 1rem;
+  height: auto;
+  opacity: 1;
+}

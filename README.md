@@ -17,3 +17,6 @@
 
 0.2.6
 - Added new player positions (after 1-2 paragraph, after title)
+
+0.2.7
+- Added buttons for choosing player type

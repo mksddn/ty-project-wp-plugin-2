@@ -1,4 +1,4 @@
-import { SelectControl } from "@wordpress/components";
+import { SelectControl, Button, ButtonGroup } from "@wordpress/components";
 import { useSelect } from "@wordpress/data";
 import { useEntityProp } from "@wordpress/core-data";
 import { PluginDocumentSettingPanel } from "@wordpress/edit-post";
@@ -8,6 +8,7 @@ import { useEffect, useState } from "@wordpress/element";
 function CustomMetaPanel() {
   const [typp_token] = useEntityProp("root", "site", "typp_token");
   const [playersOptions, setPlayersOptions] = useState([]);
+  const [chosenType, setChosenType] = useState([]);
   const getPlayers = () => {
     fetch("https://ty.mailstone.net/api/players", {
       method: "GET",
@@ -47,7 +48,6 @@ function CustomMetaPanel() {
     (select) => select("core/editor").getCurrentPostType(),
     []
   );
-  console.log(postType);
   const [meta, setMeta] = useEntityProp("postType", postType, "meta");
   const playerName = meta.typp_name;
   const playerID = meta.typp_id;
@@ -86,6 +86,12 @@ function CustomMetaPanel() {
   const updatePlayerPosition = (newValue) => {
     setMeta({ ...meta, typp_position: newValue || "" });
   };
+
+  function hideShowSelect(type) {
+    setChosenType(type);
+    getPlayers();
+  }
+
   return (
     <PluginDocumentSettingPanel
       name="customMetaPanel"
@@ -96,8 +102,25 @@ function CustomMetaPanel() {
           Selected Player: <i>{playerName}</i>
         </b>
       </p>
-      <br />
+      <ButtonGroup>
+        <Button
+          // variant="default"
+          variant="secondary"
+          className="typp-btn"
+          onClick={() => hideShowSelect("dynamic")}
+        >
+          Add a Dynamic Player
+        </Button>
+        <Button
+          variant="secondary"
+          className="typp-btn"
+          onClick={() => hideShowSelect("static")}
+        >
+          Add a Static Player
+        </Button>
+      </ButtonGroup>
       <SelectControl
+        className={"typp-slct-" + (chosenType == "dynamic" ? "show" : "hide")}
         onClick={getPlayers}
         label="Select a Dynamic Player"
         value={playerID}
@@ -106,8 +129,8 @@ function CustomMetaPanel() {
         )}
         onChange={updatePlayer}
       />
-      <br />
       <SelectControl
+        className={"typp-slct-" + (chosenType == "static" ? "show" : "hide")}
         onClick={getPlayers}
         label="Select a Static Player"
         value={playerID}
@@ -116,9 +139,9 @@ function CustomMetaPanel() {
         )}
         onChange={updatePlayer}
       />
-      <br />
       {playerType === "static" ? (
         <SelectControl
+          className={"typp-slct-" + (chosenType == "static" ? "show" : "hide")}
           label="Select a Player Position"
           value={playerPosition}
           options={[

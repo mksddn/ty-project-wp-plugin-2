@@ -35,3 +35,6 @@ Gutenberg Sidebar for TY Project
 
 = 0.2.6 (2023-05-22): =
 - Added new player positions (after 1-2 paragraph, after title)
+
+= 0.2.7 (2023-05-23): =
+- Added buttons for choosing player type
