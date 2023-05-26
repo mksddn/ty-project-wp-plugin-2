@@ -38,3 +38,6 @@ Gutenberg Sidebar for TY Project
 
 = 0.2.7 (2023-05-23): =
 - Added buttons for choosing player type
+
+= 0.2.8 (2023-05-26): =
+- Added a check if this is a post/page edit page. In order not to break the sidebar for 'template' post type etc.

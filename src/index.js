@@ -6,6 +6,13 @@ import { registerPlugin } from "@wordpress/plugins";
 import { useEffect, useState } from "@wordpress/element";
 
 function CustomMetaPanel() {
+  const postType = useSelect(
+    (select) => select("core/editor").getCurrentPostType(),
+    []
+  );
+  if (postType !== "post" && postType !== "page") {
+    return null;
+  }
   const [typp_token] = useEntityProp("root", "site", "typp_token");
   const [playersOptions, setPlayersOptions] = useState([]);
   const [chosenType, setChosenType] = useState([]);
@@ -43,11 +50,6 @@ function CustomMetaPanel() {
     getPlayers();
   }, []);
   const titleOption = [{ value: "", label: "Select a Player" }];
-
-  const postType = useSelect(
-    (select) => select("core/editor").getCurrentPostType(),
-    []
-  );
   const [meta, setMeta] = useEntityProp("postType", postType, "meta");
   const playerName = meta.typp_name;
   const playerID = meta.typp_id;

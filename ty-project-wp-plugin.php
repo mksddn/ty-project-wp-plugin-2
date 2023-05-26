@@ -5,7 +5,7 @@
  * Description:       Gutenberg Sidebar for TY Project
  * Requires at least: 5.3
  * Requires PHP:      7.0
- * Version:           0.2.7
+ * Version:           0.2.8
  * Author:            Afterlogic
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
