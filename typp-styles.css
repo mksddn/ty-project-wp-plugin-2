@@ -3,17 +3,12 @@ td.column-typp_id {
   display: none;
 }
 .typp-btn {
-  margin-bottom: 1rem;
+  margin-bottom: 1rem !important;
 }
-.typp-slct-hide {
-  height: 0;
-  opacity: 0;
+.typp-btn-remove {
+  color: #cc1818 !important;
 }
-.components-base-control__field:has(>.typp-slct-hide) {
-  margin: 0;
-}
-.typp-slct-show {
-  margin-bottom: 1rem;
-  height: auto;
-  opacity: 1;
+.typp-btn-remove:hover {
+  color: #9e1313 !important;
+  z-index: 10;
 }

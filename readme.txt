@@ -41,3 +41,7 @@ Gutenberg Sidebar for TY Project
 
 = 0.2.8 (2023-05-26): =
 - Added a check if this is a post/page edit page. In order not to break the sidebar for 'template' post type etc.
+
+= 0.2.9 (2023-05-29): =
+- Now you can delete a player
+- Fixed some styles and scripts logic

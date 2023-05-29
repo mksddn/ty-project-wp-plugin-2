@@ -83,30 +83,39 @@ function CustomMetaPanel() {
       });
     }
   }
-  const playerType = meta.typp_type;
-  const playerPosition = meta.typp_position;
+  const playerType = meta.typp_type || null;
+  const playerPosition = meta.typp_position || null;
   const updatePlayerPosition = (newValue) => {
     setMeta({ ...meta, typp_position: newValue || "" });
   };
-
   function hideShowSelect(type) {
     setChosenType(type);
     getPlayers();
   }
-
+  function removePlayer() {
+    setMeta({
+      ...meta,
+      typp_id: null,
+      typp_name: null,
+      typp_type: null,
+      typp_position: "",
+    });
+    setChosenType(null);
+  }
   return (
     <PluginDocumentSettingPanel
       name="customMetaPanel"
       title="TY Project Player"
     >
-      <p>
-        <b>
-          Selected Player: <i>{playerName}</i>
-        </b>
-      </p>
+      {playerName ? (
+        <p>
+          <b>
+            Selected Player: <i>{playerName}</i>
+          </b>
+        </p>
+      ) : null}
       <ButtonGroup>
         <Button
-          // variant="default"
           variant="secondary"
           className="typp-btn"
           onClick={() => hideShowSelect("dynamic")}
@@ -121,30 +130,34 @@ function CustomMetaPanel() {
           Add a Static Player
         </Button>
       </ButtonGroup>
-      <SelectControl
-        className={"typp-slct-" + (chosenType == "dynamic" ? "show" : "hide")}
-        onClick={getPlayers}
-        label="Select a Dynamic Player"
-        value={playerID}
-        options={titleOption.concat(
-          playersOptions.filter((player) => player.type == "dynamic")
-        )}
-        onChange={updatePlayer}
-      />
-      <SelectControl
-        className={"typp-slct-" + (chosenType == "static" ? "show" : "hide")}
-        onClick={getPlayers}
-        label="Select a Static Player"
-        value={playerID}
-        options={titleOption.concat(
-          playersOptions.filter((player) => player.type == "static")
-        )}
-        onChange={updatePlayer}
-      />
+      {chosenType === "dynamic" ? (
+        <SelectControl
+          onClick={getPlayers}
+          label="Select a Dynamic Player"
+          className="typp-btn"
+          value={playerID}
+          options={titleOption.concat(
+            playersOptions.filter((player) => player.type == "dynamic")
+          )}
+          onChange={updatePlayer}
+        />
+      ) : null}
+      {chosenType === "static" ? (
+        <SelectControl
+          onClick={getPlayers}
+          label="Select a Static Player"
+          className="typp-btn"
+          value={playerID}
+          options={titleOption.concat(
+            playersOptions.filter((player) => player.type == "static")
+          )}
+          onChange={updatePlayer}
+        />
+      ) : null}
       {playerType === "static" ? (
         <SelectControl
-          className={"typp-slct-" + (chosenType == "static" ? "show" : "hide")}
           label="Select a Player Position"
+          className="typp-btn"
           value={playerPosition}
           options={[
             { label: "After Title", value: "After Title" },
@@ -155,6 +168,17 @@ function CustomMetaPanel() {
           ]}
           onChange={updatePlayerPosition}
         />
+      ) : null}
+      {playerName ? (
+        <ButtonGroup>
+          <Button
+            variant="link"
+            className="typp-btn typp-btn-remove"
+            onClick={removePlayer}
+          >
+            Delete the Current Player
+          </Button>
+        </ButtonGroup>
       ) : null}
     </PluginDocumentSettingPanel>
   );
