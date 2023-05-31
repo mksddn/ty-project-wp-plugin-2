@@ -35,17 +35,30 @@ function typp_quick_edit_fields($column_name, $post_type)
               .finally((data) => {
                 const playerSelectors = document.querySelectorAll('.typp_id_selector');
                 playerSelectors.forEach(selector => {
-                  // console.log(playerOptions);
-                  if (!selector.options.length) {
-                    playerOptions.forEach(option => {
-                      // console.log(name.label);
-                      let opt = document.createElement('option');
-                      opt.value = option.value;
-                      // opt.option = option.label;
-                      opt.text = option.label;
-                      opt.setAttribute('data-type', option.type);
-                      selector.add(opt);
-                    });
+
+                  if (selector.options.length < 2) {
+                    function addOptgroup(groupName) {
+                      const optgroupDynamic = document.createElement('optgroup');
+                      optgroupDynamic.label = groupName;
+                      selector.add(optgroupDynamic);
+                    }
+
+                    function populateOptions(groupType) {
+                      playerOptions.forEach(option => {
+                        if (option.type === groupType) {
+                          let opt = document.createElement('option');
+                          opt.value = option.value;
+                          opt.text = option.label;
+                          opt.setAttribute('data-type', option.type);
+                          selector.add(opt);
+                        }
+                      });
+                    }
+
+                    addOptgroup('Dynamic Players');
+                    populateOptions('dynamic');
+                    addOptgroup('Static Players');
+                    populateOptions('static');
                   }
                 });
               });
@@ -60,9 +73,6 @@ function typp_quick_edit_fields($column_name, $post_type)
                   const playerType = row.querySelector('td.typp_type.column-typp_type').textContent;
                   const playerID = row.querySelector('td.typp_id.column-typp_id').textContent;
                   const positionField = document.querySelector(`option[value="${playerID}"]`).closest('fieldset').querySelector('div:has(label[for="typp_position"])');
-                  console.log(playerType);
-                  // console.log(playerID);
-                  console.log(positionField);
                   if (playerType === 'dynamic') {
                     positionField.style.display = 'none';
                   } else {
@@ -94,6 +104,7 @@ function typp_quick_edit_fields($column_name, $post_type)
           <div class="inline-edit-col">
             <label for="typp_id">TY Project Player</label>
             <select name="typp_id" class="typp_id_selector" onchange="setNewPlayer();">
+              <option disabled selected value> -- select an option -- </option>
             </select>
             <input type="hidden" name="typp_name" class="typp_name_selector">
             <input type="hidden" name="typp_type" class="typp_type_selector">
@@ -106,6 +117,7 @@ function typp_quick_edit_fields($column_name, $post_type)
           <div class="inline-edit-col">
             <label for="typp_position">Player Position</label>
             <select name="typp_position" class="typp_position_selector">
+              <option disabled selected value> -- select an option -- </option>
               <option value="After Title">After Title</option>
               <option value="Before Content">Before Content</option>
               <option value="After Content">After Content</option>

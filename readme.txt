@@ -45,3 +45,7 @@ Gutenberg Sidebar for TY Project
 = 0.2.9 (2023-05-29): =
 - Now you can delete a player
 - Fixed some styles and scripts logic
+
+= 0.2.10 (2023-05-31): =
+- Solved the problem with overwriting values via bulk editing
+- Sorting the players by their type in quick/bulk edit selector
