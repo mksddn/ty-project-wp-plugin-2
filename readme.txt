@@ -49,3 +49,7 @@ Gutenberg Sidebar for TY Project
 = 0.2.10 (2023-05-31): =
 - Solved the problem with overwriting values via bulk editing
 - Sorting the players by their type in quick/bulk edit selector
+
+= 0.2.11 (2023-06-01): =
+- Fixed the bug with the extra dynamic player margins
+- Fixed not showing a dynamic player in case a player position doesn't set

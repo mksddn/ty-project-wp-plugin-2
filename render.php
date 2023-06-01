@@ -10,17 +10,21 @@ function typp_get_vars()
   $post_id = get_queried_object_id();
   $typp_id = get_post_meta($post_id, 'typp_id', true);
   $typp_name = get_post_meta($post_id, 'typp_name', true);
-  // $typp_type = get_post_meta($id, 'typp_type', true);
+  $typp_type = get_post_meta($post_id, 'typp_type', true);
   $typp_position = get_post_meta($post_id, 'typp_position', true);
   if (!empty($typp_id)) {
-    return [$post_id, $typp_id, $typp_name, $typp_position];
+    return [$post_id, $typp_id, $typp_name, $typp_type, $typp_position];
   }
 }
 
 function typp_get_player_info()
 {
-  [$post_id, $typp_id, $typp_name, $typp_position] = typp_get_vars();
-  return [$typp_code = '<style>#ty-project-widget{margin:1rem 0;}</style><script defer id="' . $typp_id . '">Widget.init("' . $typp_id . '")</script>', $typp_position];
+  [$post_id, $typp_id, $typp_name, $typp_type, $typp_position] = typp_get_vars();
+  if ($typp_type === 'static') {
+    return [$typp_code = '<style>#ty-project-widget{margin:1rem 0;}</style><script defer id="' . $typp_id . '">Widget.init("' . $typp_id . '")</script>', $typp_position];
+  } else {
+    return [$typp_code = '<script defer id="' . $typp_id . '">Widget.init("' . $typp_id . '")</script>', $typp_position];
+  }
 }
 
 function typp_show_player()
@@ -83,6 +87,13 @@ function typp_show_player()
     }
     add_filter('the_title', 'typp_filter_the_title');
   } else {
+    function typp_add_after_content($content = '')
+    {
+      [$typp_code] = typp_get_player_info();
+      $content .= $typp_code;
+      return $content;
+    }
+    add_filter('the_content', 'typp_add_after_content');
   }
 }
 
