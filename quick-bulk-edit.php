@@ -65,6 +65,14 @@ function typp_quick_edit_fields($column_name, $post_type)
           };
           getPlayers();
 
+          function showHidePositionField(playerType, positionField) {
+            if (playerType === 'static') {
+              positionField.style.display = 'block';
+            } else {
+              positionField.style.display = 'none';
+            }
+          }
+
           function checkPositionFields() {
             document.querySelectorAll('.row-actions button.button-link.editinline').forEach(element => {
               element.addEventListener('click', function(e) {
@@ -73,11 +81,7 @@ function typp_quick_edit_fields($column_name, $post_type)
                   const playerType = row.querySelector('td.typp_type.column-typp_type').textContent;
                   const playerID = row.querySelector('td.typp_id.column-typp_id').textContent;
                   const positionField = document.querySelector(`option[value="${playerID}"]`).closest('fieldset').querySelector('div:has(label[for="typp_position"])');
-                  if (playerType === 'dynamic') {
-                    positionField.style.display = 'none';
-                  } else {
-                    positionField.style.display = 'block';
-                  }
+                  showHidePositionField(playerType, positionField)
                 }, 500);
               })
             });
@@ -93,15 +97,20 @@ function typp_quick_edit_fields($column_name, $post_type)
             const typpTypeInput = select.parentNode.querySelector('.typp_type_selector');
             typpTypeInput.value = newPlayerType;
             const positionField = select.parentNode.parentNode.querySelector('div:has(label[for="typp_position"])');
-            if (newPlayerType === 'dynamic') {
-              positionField.style.display = 'none';
-            } else {
-              positionField.style.display = 'block';
-            }
+            showHidePositionField(newPlayerType, positionField);
+          }
+
+          function removePlayer() {
+            const fieldset = event.target.closest('fieldset');
+            fieldset.querySelectorAll('input, select').forEach(el => {
+              el.value = '';
+            });
+            showHidePositionField('', fieldset.querySelector('div:has(label[for="typp_position"])'));
+            event.target.innerHTML = 'The current Player has been deleted';
           }
         </script>
-        <fieldset class="inline-edit-col-left" style="width:auto;">
-          <div class="inline-edit-col">
+        <fieldset class="inline-edit-col-left typp-quickedit-fieldset" style="width:auto;">
+          <div class="inline-edit-col typp_id_selector-wrapper">
             <label for="typp_id">TY Project Player</label>
             <select name="typp_id" class="typp_id_selector" onchange="setNewPlayer();">
               <option disabled selected value> -- select an option -- </option>
@@ -114,7 +123,7 @@ function typp_quick_edit_fields($column_name, $post_type)
       }
     case 'typp_position': {
         ?>
-          <div class="inline-edit-col">
+          <div class="inline-edit-col typp_position_selector-wrapper">
             <label for="typp_position">Player Position</label>
             <select name="typp_position" class="typp_position_selector">
               <option disabled selected value> -- select an option -- </option>
@@ -125,6 +134,7 @@ function typp_quick_edit_fields($column_name, $post_type)
               <option value="After 2nd Paragraph">After 2nd Paragraph</option>
             </select>
           </div>
+          <div class="typp-btn-remove typp-quickedit-remove" onclick="removePlayer();">Delete the current Player</div>
         </fieldset>
   <?php
         break;
@@ -142,10 +152,14 @@ function typp_quick_edit_save($post_id)
   update_post_meta($post_id, 'typp_name', $typp_name);
   $typp_id = $_REQUEST['typp_id'] ?? get_post_meta($post_id, 'typp_id', true);
   update_post_meta($post_id, 'typp_id', $typp_id);
-  $typp_position = $_REQUEST['typp_position'] ?? get_post_meta($post_id, 'typp_position', true);
-  update_post_meta($post_id, 'typp_position', $typp_position);
   $typp_type = $_REQUEST['typp_type'] ?? get_post_meta($post_id, 'typp_type', true);
   update_post_meta($post_id, 'typp_type', $typp_type);
+  if ($typp_type == 'static') {
+    $typp_position = $_REQUEST['typp_position'] ?? 'Before Content';
+    update_post_meta($post_id, 'typp_position', $typp_position);
+  } else {
+    update_post_meta($post_id, 'typp_position', '');
+  }
 }
 
 add_action('admin_footer', 'typp_admin_footer_action');
@@ -189,8 +203,12 @@ function typp_bulk_edit_save($post_id)
   update_post_meta($post_id, 'typp_name', $typp_name);
   $typp_id = !empty($_REQUEST['typp_id']) ? $_REQUEST['typp_id'] : get_post_meta($post_id, 'typp_id', true);
   update_post_meta($post_id, 'typp_id', $typp_id);
-  $typp_position = !empty($_REQUEST['typp_position']) ? $_REQUEST['typp_position'] : get_post_meta($post_id, 'typp_position', true);
-  update_post_meta($post_id, 'typp_position', $typp_position);
   $typp_type = $_REQUEST['typp_type'] ?? get_post_meta($post_id, 'typp_type', true);
   update_post_meta($post_id, 'typp_type', $typp_type);
+  if ($typp_type == 'static') {
+    $typp_position = $_REQUEST['typp_position'] ?? 'Before Content';
+    update_post_meta($post_id, 'typp_position', $typp_position);
+  } else {
+    update_post_meta($post_id, 'typp_position', '');
+  }
 }

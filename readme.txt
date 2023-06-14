@@ -53,3 +53,8 @@ Gutenberg Sidebar for TY Project
 = 0.2.11 (2023-06-01): =
 - Fixed the bug with the extra dynamic player margins
 - Fixed not showing a dynamic player in case a player position doesn't set
+
+= 0.2.12 (2023-06-14): =
+- Changed the style of the buttons "Add a Dynamic Player" and "Add a Static Player" to radio buttons on the edit page
+- Fixed: After quick/bulk editing, the dynamic player had a position in the table
+- Added the functionality to "Delete the current Player" on the quick/bulk edit block

@@ -1,4 +1,9 @@
-import { SelectControl, Button, ButtonGroup } from "@wordpress/components";
+import {
+  SelectControl,
+  Button,
+  ButtonGroup,
+  RadioControl,
+} from "@wordpress/components";
 import { useSelect } from "@wordpress/data";
 import { useEntityProp } from "@wordpress/core-data";
 import { PluginDocumentSettingPanel } from "@wordpress/edit-post";
@@ -114,7 +119,7 @@ function CustomMetaPanel() {
           </b>
         </p>
       ) : null}
-      <ButtonGroup>
+      {/* <ButtonGroup>
         <Button
           variant="secondary"
           className="typp-btn"
@@ -129,7 +134,17 @@ function CustomMetaPanel() {
         >
           Add a Static Player
         </Button>
-      </ButtonGroup>
+      </ButtonGroup> */}
+      <RadioControl
+        // label="Add a Player"
+        // help="The type of the current user"
+        selected={chosenType}
+        options={[
+          { label: "Add a Dynamic Player", value: "dynamic" },
+          { label: "Add a Static Player", value: "static" },
+        ]}
+        onChange={(value) => hideShowSelect(value)}
+      />
       {chosenType === "dynamic" ? (
         <SelectControl
           onClick={getPlayers}
@@ -154,7 +169,7 @@ function CustomMetaPanel() {
           onChange={updatePlayer}
         />
       ) : null}
-      {playerType === "static" ? (
+      {playerType === "static" && chosenType === "static" ? (
         <SelectControl
           label="Select a Player Position"
           className="typp-btn"

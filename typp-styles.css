@@ -2,13 +2,26 @@ th.column-typp_id,
 td.column-typp_id {
   display: none;
 }
-.typp-btn {
+/* .typp-btn {
   margin-bottom: 1rem !important;
-}
+} */
 .typp-btn-remove {
   color: #cc1818 !important;
 }
 .typp-btn-remove:hover {
   color: #9e1313 !important;
   z-index: 10;
+}
+.typp-quickedit-remove {
+  cursor: pointer;
+  margin: 1rem 0;
+}
+.components-base-control {
+  margin-bottom: 1rem;
+}
+.typp-quickedit-fieldset {
+  margin-bottom: 1rem !important;
+}
+.typp_position_selector-wrapper {
+  display: none;
 }
