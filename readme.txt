@@ -58,3 +58,6 @@ Gutenberg Sidebar for TY Project
 - Changed the style of the buttons "Add a Dynamic Player" and "Add a Static Player" to radio buttons on the edit page
 - Fixed: After quick/bulk editing, the dynamic player had a position in the table
 - Added the functionality to "Delete the current Player" on the quick/bulk edit block
+
+= 0.2.13 (2023-06-15): =
+- Fixed the bug with deleting the current player via quick/bulk editing

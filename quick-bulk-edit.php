@@ -105,8 +105,9 @@ function typp_quick_edit_fields($column_name, $post_type)
             fieldset.querySelectorAll('input, select').forEach(el => {
               el.value = '';
             });
+            fieldset.querySelector('input.typp_type_remove').value = 'true';
             showHidePositionField('', fieldset.querySelector('div:has(label[for="typp_position"])'));
-            event.target.innerHTML = 'The current Player has been deleted';
+            event.target.innerHTML = `The current Player has been deleted<br>Don't forget to push Update!`;
           }
         </script>
         <fieldset class="inline-edit-col-left typp-quickedit-fieldset" style="width:auto;">
@@ -117,6 +118,7 @@ function typp_quick_edit_fields($column_name, $post_type)
             </select>
             <input type="hidden" name="typp_name" class="typp_name_selector">
             <input type="hidden" name="typp_type" class="typp_type_selector">
+            <input type="hidden" name="typp_remove" class="typp_type_remove" value="false">
           </div>
         <?php
         break;
@@ -160,6 +162,9 @@ function typp_quick_edit_save($post_id)
   } else {
     update_post_meta($post_id, 'typp_position', '');
   }
+  if ($_REQUEST['typp_remove'] == 'true') {
+    update_post_meta($post_id, 'typp_id', '');
+  }
 }
 
 add_action('admin_footer', 'typp_admin_footer_action');
@@ -199,9 +204,9 @@ function typp_bulk_edit_save($post_id)
   if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'bulk-posts')) {
     return;
   }
-  $typp_name = !empty($_REQUEST['typp_name']) ? $_REQUEST['typp_name'] : get_post_meta($post_id, 'typp_name', true);
+  $typp_name = $_REQUEST['typp_name'] ?? get_post_meta($post_id, 'typp_name', true);
   update_post_meta($post_id, 'typp_name', $typp_name);
-  $typp_id = !empty($_REQUEST['typp_id']) ? $_REQUEST['typp_id'] : get_post_meta($post_id, 'typp_id', true);
+  $typp_id = $_REQUEST['typp_id'] ?? get_post_meta($post_id, 'typp_id', true);
   update_post_meta($post_id, 'typp_id', $typp_id);
   $typp_type = $_REQUEST['typp_type'] ?? get_post_meta($post_id, 'typp_type', true);
   update_post_meta($post_id, 'typp_type', $typp_type);
@@ -210,5 +215,8 @@ function typp_bulk_edit_save($post_id)
     update_post_meta($post_id, 'typp_position', $typp_position);
   } else {
     update_post_meta($post_id, 'typp_position', '');
+  }
+  if ($_REQUEST['typp_remove'] == 'true') {
+    update_post_meta($post_id, 'typp_id', '');
   }
 }
