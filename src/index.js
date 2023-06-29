@@ -22,7 +22,7 @@ function CustomMetaPanel() {
   const [playersOptions, setPlayersOptions] = useState([]);
   const [chosenType, setChosenType] = useState([]);
   const getPlayers = () => {
-    fetch("https://ty.mailstone.net/api/players", {
+    fetch("https://dashboard.tylr.com/api/players", {
       method: "GET",
       status: "active",
       headers: {
@@ -110,7 +110,7 @@ function CustomMetaPanel() {
   return (
     <PluginDocumentSettingPanel
       name="customMetaPanel"
-      title="TY Project Player"
+      title="TYLR Player"
     >
       {playerName ? (
         <p>

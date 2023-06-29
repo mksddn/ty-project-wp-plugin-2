@@ -1,6 +1,6 @@
-=== TY Project Player ===
+=== TYLR Player ===
 Contributors: Afterlogic
-Tags: TY Project Player
+Tags: TYLR Player
 Requires at least: 5.3
 Tested up to: 6.0
 Requires PHP: 7.0
@@ -14,7 +14,7 @@ Gutenberg Sidebar for TY Project
 
 Gutenberg Sidebar for TY Project
 
-**Important!** TY Project Player WP Plugin requires Gutenberg Editor.
+**Important!** TYLR Player WP Plugin requires Gutenberg Editor.
 
 == Changelog ==
 

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Name:       TY Project Player
- * Description:       Gutenberg Sidebar for TY Project
+ * Plugin Name:       TYLR Player
+ * Description:       Gutenberg Sidebar for TYLR Player
  * Requires at least: 5.3
  * Requires PHP:      7.0
  * Version:           0.2.13

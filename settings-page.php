@@ -12,8 +12,8 @@ function add_settings_page()
 {
   add_submenu_page(
     'options-general.php',
-    'TY Project Player Settings',
-    'TY Project Player',
+    'TYLR Player Settings',
+    'TYLR Player',
     'manage_options',
     'typp',
     'show_settings_form'
@@ -31,7 +31,7 @@ function add_settings()
   register_setting('typp_settings', 'typp_token', array('show_in_rest' => true));
   register_setting('typp_settings', 'typp_refresh_token');
 
-  add_settings_section('typp_settings_section', 'Use your credentials to log in to the TY Project', '', 'typp');
+  add_settings_section('typp_settings_section', 'Use your credentials to log in to the TYLR dashboard', '', 'typp');
 
   add_settings_field(
     $typp_user_email,
@@ -102,7 +102,7 @@ function show_settings_form()
 
 function typp_auth($email, $password)
 {
-  $url = 'https://ty.mailstone.net/api/auth/login';
+  $url = 'https://dashboard.tylr.com/api/auth/login';
   $response = wp_remote_post($url, array(
     'headers' => array('Content-Type: application/x-www-form-urlencoded'),
     'body'    => array('email' =>  $email, 'password' => $password),
@@ -116,6 +116,6 @@ function typp_auth($email, $password)
   } else {
     $responceData = (!is_wp_error($response)) ? json_decode(wp_remote_retrieve_body($response), true) : null;
     echo '<div class="notice notice-error is-dismissible"><p>' . $responceData['message'] . '</p>
-    <p>You can change your password on <a href="https://ty.mailstone.net/" target="_blank">TY Project Page</a></p></div>';
+    <p>You can change your password on <a href="https://dashboard.tylr.com/" target="_blank">dashboard.tylr.com</a></p></div>';
   }
 }

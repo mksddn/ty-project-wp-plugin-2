@@ -10,7 +10,7 @@ function typp_quick_edit_fields($column_name, $post_type)
           async function getPlayers() {
             let playerOptions = [];
             let typp_token = '<?php echo get_option('typp_token') ?>';
-            await fetch("https://ty.mailstone.net/api/players", {
+            await fetch("https://dashboard.tylr.com/api/players", {
                 method: "GET",
                 status: "active",
                 headers: {
@@ -112,7 +112,7 @@ function typp_quick_edit_fields($column_name, $post_type)
         </script>
         <fieldset class="inline-edit-col-left typp-quickedit-fieldset" style="width:auto;">
           <div class="inline-edit-col typp_id_selector-wrapper">
-            <label for="typp_id">TY Project Player</label>
+            <label for="typp_id">TYLR Player</label>
             <select name="typp_id" class="typp_id_selector" onchange="setNewPlayer();">
               <option disabled selected value> -- select an option -- </option>
             </select>

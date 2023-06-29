@@ -3,8 +3,8 @@ add_filter('manage_post_posts_columns', 'typp_admin_columns');
 add_filter('manage_page_posts_columns', 'typp_admin_columns');
 function typp_admin_columns($column_array)
 {
-  $column_array['typp_name'] = 'TY Project Player';
-  $column_array['typp_id'] = 'TY Project Player ID';
+  $column_array['typp_name'] = 'TYLR Player';
+  $column_array['typp_id'] = 'TYLR Player ID';
   $column_array['typp_type'] = 'Player Type';
   $column_array['typp_position'] = 'Player Position';
   return $column_array;

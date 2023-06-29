@@ -100,6 +100,6 @@ function typp_show_player()
 
 function add_main_typp_script()
 {
-  wp_enqueue_script('script-name', 'https://ty.mailstone.net/widget/player.js');
+  wp_enqueue_script('script-name', 'https://dashboard.tylr.com/widget/player.js');
 }
 add_action('wp_enqueue_scripts', 'add_main_typp_script');
