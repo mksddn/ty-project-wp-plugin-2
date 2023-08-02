@@ -5,6 +5,15 @@ if (!is_admin()) {
   add_action('template_redirect', 'typp_show_player');
 }
 
+function add_main_typp_script()
+{
+  $post_id = get_queried_object_id();
+  if (get_post_meta($post_id, 'typp_id', true)) {
+    wp_enqueue_script('script-name', 'https://dashboard.tylr.com/widget/player.js');
+  }
+}
+add_action('wp_enqueue_scripts', 'add_main_typp_script');
+
 function typp_get_vars()
 {
   $post_id = get_queried_object_id();
@@ -96,10 +105,3 @@ function typp_show_player()
     add_filter('the_content', 'typp_add_after_content');
   }
 }
-
-
-function add_main_typp_script()
-{
-  wp_enqueue_script('script-name', 'https://dashboard.tylr.com/widget/player.js');
-}
-add_action('wp_enqueue_scripts', 'add_main_typp_script');

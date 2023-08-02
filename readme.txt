@@ -1,18 +1,18 @@
 === TYLR Player ===
-Contributors: Afterlogic
+Contributors: Ty Project
 Tags: TYLR Player
 Requires at least: 5.3
 Tested up to: 6.0
 Requires PHP: 7.0
-Stable tag: 0.2.5
+Stable tag: 0.2.14
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Gutenberg Sidebar for TY Project
+Gutenberg Sidebar for TYLR Player
 
 == Description ==
 
-Gutenberg Sidebar for TY Project
+TYLR (Tyler) is a free and easy solution for publishers to turn text into audio content for everyone to enjoy.
 
 **Important!** TYLR Player WP Plugin requires Gutenberg Editor.
 
@@ -61,3 +61,6 @@ Gutenberg Sidebar for TY Project
 
 = 0.2.13 (2023-06-15): =
 - Fixed the bug with deleting the current player via quick/bulk editing
+
+= 0.2.14 (2023-08-02): =
+- Fixed the bug with double player initialization
