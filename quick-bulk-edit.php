@@ -1,7 +1,11 @@
 <?php
-add_action('quick_edit_custom_box',  'typp_quick_edit_fields', 10, 2);
+if (!defined('ABSPATH')) {
+  exit;
+}
 
-function typp_quick_edit_fields($column_name, $post_type)
+add_action('quick_edit_custom_box',  'tytylr_quick_edit_fields', 10, 2);
+
+function tytylr_quick_edit_fields($column_name, $post_type)
 {
   switch ($column_name) {
     case 'typp_name': {
@@ -9,7 +13,7 @@ function typp_quick_edit_fields($column_name, $post_type)
         <script>
           async function getPlayers() {
             let playerOptions = [];
-            let typp_token = '<?php echo get_option('typp_token') ?>';
+            let typp_token = '<?php echo esc_html(get_option('tytylr_token')); ?>';
             await fetch("https://dashboard.tylr.com/api/players", {
                 method: "GET",
                 status: "active",
@@ -144,8 +148,8 @@ function typp_quick_edit_fields($column_name, $post_type)
   }
 }
 
-add_action('save_post', 'typp_quick_edit_save');
-function typp_quick_edit_save($post_id)
+add_action('save_post', 'tytylr_quick_edit_save');
+function tytylr_quick_edit_save($post_id)
 {
   if (!wp_verify_nonce($_POST['_inline_edit'], 'inlineeditnonce')) {
     return;
@@ -167,8 +171,8 @@ function typp_quick_edit_save($post_id)
   }
 }
 
-add_action('admin_footer', 'typp_admin_footer_action');
-function typp_admin_footer_action($data)
+add_action('admin_footer', 'tytylr_admin_footer_action');
+function tytylr_admin_footer_action($data)
 { ?>
   <script>
     jQuery(function($) {
@@ -196,10 +200,10 @@ function typp_admin_footer_action($data)
 <?php
 }
 
-add_action('bulk_edit_custom_box',  'typp_quick_edit_fields', 10, 2);
+add_action('bulk_edit_custom_box',  'tytylr_quick_edit_fields', 10, 2);
 
-add_action('save_post', 'typp_bulk_edit_save');
-function typp_bulk_edit_save($post_id)
+add_action('save_post', 'tytylr_bulk_edit_save');
+function tytylr_bulk_edit_save($post_id)
 {
   if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'bulk-posts')) {
     return;

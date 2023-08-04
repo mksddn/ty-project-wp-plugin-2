@@ -5,7 +5,7 @@
  * Description:       Gutenberg Sidebar for TYLR Player
  * Requires at least: 5.3
  * Requires PHP:      7.0
- * Version:           0.2.14
+ * Version:           0.2.15
  * Author:            Ty Project
  * Author URI:        https://www.tylr.com/
  * License:           GPL-2.0-or-later
@@ -15,21 +15,21 @@ if (!defined('ABSPATH')) {
   exit;
 }
 
-function typp_enqueue_scripts()
+function tytylr_enqueue_scripts()
 {
   wp_enqueue_script(
-    'typp-gutenberg-sidebar-js',
+    'tytylr-gutenberg-sidebar-js',
     plugins_url('build/index.js', __FILE__),
     array('wp-plugins', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data')
   );
 }
-add_action('enqueue_block_editor_assets', 'typp_enqueue_scripts');
+add_action('enqueue_block_editor_assets', 'tytylr_enqueue_scripts');
 
-function typp_enqueue_styles()
+function tytylr_enqueue_styles()
 {
-  wp_enqueue_style('typp-css', plugins_url('typp-styles.css', __FILE__));
+  wp_enqueue_style('tytylr-css', plugins_url('tytylr-styles.css', __FILE__));
 }
-add_action('admin_enqueue_scripts', 'typp_enqueue_styles');
+add_action('admin_enqueue_scripts', 'tytylr_enqueue_styles');
 
 require_once plugin_dir_path(__FILE__) . 'post-meta.php';
 require_once plugin_dir_path(__FILE__) . 'post-columns.php';

@@ -18,7 +18,7 @@ function CustomMetaPanel() {
   if (postType !== "post" && postType !== "page") {
     return null;
   }
-  const [typp_token] = useEntityProp("root", "site", "typp_token");
+  const [typp_token] = useEntityProp("root", "site", "tytylr_token");
   const [playersOptions, setPlayersOptions] = useState([]);
   const [chosenType, setChosenType] = useState([]);
   const getPlayers = () => {
