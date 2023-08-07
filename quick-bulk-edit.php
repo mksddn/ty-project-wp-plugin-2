@@ -154,19 +154,19 @@ function tytylr_quick_edit_save($post_id)
   if (!wp_verify_nonce($_POST['_inline_edit'], 'inlineeditnonce')) {
     return;
   }
-  $typp_name = $_REQUEST['typp_name'] ?? get_post_meta($post_id, 'typp_name', true);
+  $typp_name = sanitize_text_field($_REQUEST['typp_name']) ?? get_post_meta($post_id, 'typp_name', true);
   update_post_meta($post_id, 'typp_name', $typp_name);
-  $typp_id = $_REQUEST['typp_id'] ?? get_post_meta($post_id, 'typp_id', true);
+  $typp_id = sanitize_text_field($_REQUEST['typp_id']) ?? get_post_meta($post_id, 'typp_id', true);
   update_post_meta($post_id, 'typp_id', $typp_id);
-  $typp_type = $_REQUEST['typp_type'] ?? get_post_meta($post_id, 'typp_type', true);
+  $typp_type = sanitize_text_field($_REQUEST['typp_type']) ?? get_post_meta($post_id, 'typp_type', true);
   update_post_meta($post_id, 'typp_type', $typp_type);
   if ($typp_type == 'static') {
-    $typp_position = $_REQUEST['typp_position'] ?? 'Before Content';
+    $typp_position = isset($_REQUEST['typp_position']) ? sanitize_text_field($_REQUEST['typp_position']) : 'Before Content';
     update_post_meta($post_id, 'typp_position', $typp_position);
   } else {
     update_post_meta($post_id, 'typp_position', '');
   }
-  if ($_REQUEST['typp_remove'] == 'true') {
+  if (sanitize_text_field($_REQUEST['typp_remove']) == 'true') {
     update_post_meta($post_id, 'typp_id', '');
   }
 }
@@ -208,19 +208,19 @@ function tytylr_bulk_edit_save($post_id)
   if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'bulk-posts')) {
     return;
   }
-  $typp_name = $_REQUEST['typp_name'] ?? get_post_meta($post_id, 'typp_name', true);
+  $typp_name = sanitize_text_field($_REQUEST['typp_name']) ?? get_post_meta($post_id, 'typp_name', true);
   update_post_meta($post_id, 'typp_name', $typp_name);
-  $typp_id = $_REQUEST['typp_id'] ?? get_post_meta($post_id, 'typp_id', true);
+  $typp_id = sanitize_text_field($_REQUEST['typp_id']) ?? get_post_meta($post_id, 'typp_id', true);
   update_post_meta($post_id, 'typp_id', $typp_id);
-  $typp_type = $_REQUEST['typp_type'] ?? get_post_meta($post_id, 'typp_type', true);
+  $typp_type = sanitize_text_field($_REQUEST['typp_type']) ?? get_post_meta($post_id, 'typp_type', true);
   update_post_meta($post_id, 'typp_type', $typp_type);
   if ($typp_type == 'static') {
-    $typp_position = $_REQUEST['typp_position'] ?? 'Before Content';
+    $typp_position = isset($_REQUEST['typp_position']) ? sanitize_text_field($_REQUEST['typp_position']) : 'Before Content';
     update_post_meta($post_id, 'typp_position', $typp_position);
   } else {
     update_post_meta($post_id, 'typp_position', '');
   }
-  if ($_REQUEST['typp_remove'] == 'true') {
+  if (sanitize_text_field($_REQUEST['typp_remove']) == 'true') {
     update_post_meta($post_id, 'typp_id', '');
   }
 }

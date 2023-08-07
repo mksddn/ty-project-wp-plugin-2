@@ -2,9 +2,9 @@
 Contributors: Ty Project
 Tags: TYLR Player
 Requires at least: 5.3
-Tested up to: 6.0
+Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 0.2.15
+Stable tag: 0.2.16
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,3 +69,6 @@ TYLR (Tyler) is a free and easy solution for publishers to turn text into audio 
 - Prohibition Direct File Access to plugin files
 - Generic function/class/define/namespace/option names
 - Variables and options are escaped when echo'd now
+
+= 0.2.16 (2023-08-07): =
+- The data is sanitized, escaped, and validated now

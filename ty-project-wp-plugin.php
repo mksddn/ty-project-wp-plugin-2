@@ -5,7 +5,7 @@
  * Description:       Gutenberg Sidebar for TYLR Player
  * Requires at least: 5.3
  * Requires PHP:      7.0
- * Version:           0.2.15
+ * Version:           0.2.16
  * Author:            Ty Project
  * Author URI:        https://www.tylr.com/
  * License:           GPL-2.0-or-later

@@ -103,7 +103,7 @@ function tytylr_show_settings_form()
   printf('</form></div>');
 
   if (isset($_POST['typp_user_email']) && isset($_POST['typp_user_password'])) {
-    tytylr_auth($_POST['typp_user_email'], $_POST['typp_user_password']);
+    tytylr_auth(sanitize_email($_POST['typp_user_email']), sanitize_text_field($_POST['typp_user_password']));
   }
 }
 
