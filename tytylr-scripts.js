@@ -8,6 +8,7 @@ window.addEventListener("load", (event) => {
 
   // insert player
   const allParagraphs = document.querySelectorAll('.entry-content p');
+  const theTitle = document.querySelector('.wp-block-post-title') || document.querySelector('.entry-title') || document.querySelector('h1')
   switch (typp_position) {
     case 'After 1st Paragraph':
       allParagraphs[0].appendChild(playerInitCode);
@@ -22,7 +23,7 @@ window.addEventListener("load", (event) => {
       allParagraphs[0].prepend(playerInitCode);
       break;
     case 'After Title':
-      document.querySelector('.wp-block-post-title' || 'h1').appendChild(playerInitCode);
+      theTitle.appendChild(playerInitCode);
       break;
     default:
       allParagraphs[0].prepend(playerInitCode);
