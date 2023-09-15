@@ -151,7 +151,7 @@ function tytylr_quick_edit_fields($column_name, $post_type)
 add_action('save_post', 'tytylr_quick_edit_save');
 function tytylr_quick_edit_save($post_id)
 {
-  if (!wp_verify_nonce($_POST['_inline_edit'], 'inlineeditnonce')) {
+  if (!isset($_POST['_inline_edit']) || !wp_verify_nonce($_POST['_inline_edit'], 'inlineeditnonce')) {
     return;
   }
   $typp_name = sanitize_text_field($_REQUEST['typp_name']) ?? get_post_meta($post_id, 'typp_name', true);
@@ -205,7 +205,7 @@ add_action('bulk_edit_custom_box',  'tytylr_quick_edit_fields', 10, 2);
 add_action('save_post', 'tytylr_bulk_edit_save');
 function tytylr_bulk_edit_save($post_id)
 {
-  if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'bulk-posts')) {
+  if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce($_REQUEST['_wpnonce'], 'bulk-posts')) {
     return;
   }
   $typp_name = sanitize_text_field($_REQUEST['typp_name']) ?? get_post_meta($post_id, 'typp_name', true);

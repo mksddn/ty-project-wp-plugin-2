@@ -69,7 +69,7 @@ function tytylr_add_email_field($args)
     '<input type="text" id="%s" name="%s" value="%s" />',
     esc_attr($args['name']),
     esc_attr($args['name']),
-    strval($value)
+    esc_html(strval($value))
   );
 }
 function tytylr_add_password_field($args)
@@ -79,7 +79,7 @@ function tytylr_add_password_field($args)
     '<input type="password" id="%s" name="%s" value="%s" />',
     esc_attr($args['name']),
     esc_attr($args['name']),
-    strval($value)
+    esc_html(strval($value))
   );
 }
 
@@ -95,7 +95,7 @@ function tytylr_show_settings_form()
     '<div class="wrap">
 			<h1>%s</h1>
 			<form method="post" action="options.php">',
-    get_admin_page_title()
+    esc_html(get_admin_page_title())
   );
   settings_fields('typp_settings');
   do_settings_sections('typp');
@@ -125,7 +125,7 @@ function tytylr_auth($email, $password)
     printf(
       '<div class="notice notice-error is-dismissible"><p>%s</p>
     <p>You can change your password on <a href="https://dashboard.tylr.com/" target="_blank">dashboard.tylr.com</a></p></div>',
-      $responceData['message']
+      esc_html($responceData['message'])
     );
   }
 }

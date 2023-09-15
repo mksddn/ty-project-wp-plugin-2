@@ -72,3 +72,9 @@ TYLR (Tyler) is a free and easy solution for publishers to turn text into audio 
 
 = 0.2.16 (2023-08-07): =
 - The data is sanitized, escaped, and validated now
+
+= 0.2.17 (2023-09-15): =
+- Additional checking of internal variables
+- The widget rendering logic has been moved from php to js
+- Variables and options are escaped when echo'd now
+- Clean code comments

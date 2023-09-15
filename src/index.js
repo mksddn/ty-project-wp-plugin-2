@@ -119,25 +119,7 @@ function CustomMetaPanel() {
           </b>
         </p>
       ) : null}
-      {/* <ButtonGroup>
-        <Button
-          variant="secondary"
-          className="typp-btn"
-          onClick={() => hideShowSelect("dynamic")}
-        >
-          Add a Dynamic Player
-        </Button>
-        <Button
-          variant="secondary"
-          className="typp-btn"
-          onClick={() => hideShowSelect("static")}
-        >
-          Add a Static Player
-        </Button>
-      </ButtonGroup> */}
       <RadioControl
-        // label="Add a Player"
-        // help="The type of the current user"
         selected={chosenType}
         options={[
           { label: "Add a Dynamic Player", value: "dynamic" },
@@ -169,7 +151,7 @@ function CustomMetaPanel() {
           onChange={updatePlayer}
         />
       ) : null}
-      {playerType === "static" && chosenType === "static" ? (
+      {playerType === "static" || chosenType === "static" ? (
         <SelectControl
           label="Select a Player Position"
           className="typp-btn"
